@@ -1,13 +1,11 @@
-// src/components/TodoApp.tsx
-
 import React, {useState} from 'react';
 import {
   View,
   Text,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
   FlatList,
-  StyleSheet,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -19,20 +17,22 @@ import {
 import {TodoState} from '../store/types';
 
 const TodoApp: React.FC = () => {
-  const [newTodo, setNewTodo] = useState('');
+  const [newItem, setNewItem] = useState('');
   const [editingTodo, setEditingTodo] = useState<number | null>(null);
   const [editedTodoText, setEditedTodoText] = useState('');
 
   const dispatch = useDispatch();
   const todos = useSelector((state: TodoState) => state.todos);
+  console.log('todo', todos);
 
+  // add new task
   const handleAddTodo = () => {
-    if (newTodo.trim() !== '') {
-      dispatch(addTodo(newTodo));
-      setNewTodo('');
+    if (newItem.trim() !== '') {
+      dispatch(addTodo(newItem));
+      setNewItem('');
     }
   };
-
+  //
   const handleEditTodo = () => {
     if (editingTodo !== null && editedTodoText.trim() !== '') {
       dispatch(editTodo(editingTodo, editedTodoText));
@@ -40,19 +40,18 @@ const TodoApp: React.FC = () => {
       setEditedTodoText('');
     }
   };
-
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Todo App</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          value={newTodo}
-          onChangeText={text => setNewTodo(text)}
+          value={newItem}
+          onChangeText={(test: string) => setNewItem(test)}
           placeholder="Enter a new todo"
         />
         <TouchableOpacity style={styles.addButton} onPress={handleAddTodo}>
-          <Text style={styles.buttonText}>Add</Text>
+          <Text style={styles.buttonText}>add</Text>
         </TouchableOpacity>
       </View>
       <FlatList
@@ -107,7 +106,6 @@ const TodoApp: React.FC = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -130,6 +128,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginRight: 10,
     padding: 10,
+    borderRadius: 5,
   },
   addButton: {
     backgroundColor: 'blue',
@@ -137,8 +136,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonText: {
-    color: 'white',
     fontWeight: 'bold',
+    color: '#fff',
   },
   todoItem: {
     flexDirection: 'row',
@@ -175,5 +174,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
-
 export default TodoApp;
