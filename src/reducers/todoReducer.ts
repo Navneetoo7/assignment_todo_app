@@ -5,8 +5,6 @@ import {TodoState, TodoActionTypes} from '../store/types';
 const initialState: TodoState = {
   todos: [],
 };
-console.log('TodoActionTypes:-', initialState);
-
 const todoReducer = (
   state = initialState,
   action: TodoActionTypes,

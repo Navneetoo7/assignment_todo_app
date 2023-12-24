@@ -32,7 +32,7 @@ const TodoApp: React.FC = () => {
       setNewItem('');
     }
   };
-  //
+  //update task
   const handleEditTodo = () => {
     if (editingTodo !== null && editedTodoText.trim() !== '') {
       dispatch(editTodo(editingTodo, editedTodoText));
