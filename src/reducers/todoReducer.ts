@@ -43,6 +43,5 @@ const todoReducer = (
       return state;
   }
 };
-console.log('TodoActionTypes:-', initialState);
 
 export default todoReducer;
